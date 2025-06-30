@@ -1,6 +1,6 @@
 .quote-section {
   background-color: #000;
-  color: gold;
+  color: #f2b632;
   padding: 4rem 2rem;
   text-align: center;
 }
@@ -22,7 +22,7 @@
 .quote-form select,
 .quote-form textarea {
   padding: 1rem;
-  border: 1px solid gold;
+  border: 1px solid #f2b632;
   background: #111;
   color: white;
   border-radius: 8px;
@@ -38,7 +38,7 @@
 }
 
 .quote-form button {
-  background-color: gold;
+  background-color: #f2b632;
   color: black;
   font-weight: 600;
   padding: 1rem;

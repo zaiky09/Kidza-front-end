@@ -1,5 +1,5 @@
 .hero {
-  height: 100vh;
+  min-height: 100vh;
   background-color: black;
   background-size: cover;
   background-position: center;
@@ -13,7 +13,7 @@
 
 .overlay {
   background-color: rgba(0, 0, 0, 0.7);
-  color: gold;
+  color: #f2b632;
   text-align: center;
   padding: 2rem;
   border-radius: 12px;
@@ -34,7 +34,7 @@
 }
 
 .hero-btn {
-  background: gold;
+  background: #f2b632;
   color: black;
   padding: 0.8rem 1.5rem;
   font-weight: 600;

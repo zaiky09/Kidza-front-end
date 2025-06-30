@@ -54,6 +54,7 @@ function Features() {
             <p>{feature.description}</p>
           </motion.div>
         ))}
+        
       </div>
 
       <motion.div

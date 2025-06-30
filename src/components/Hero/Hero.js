@@ -30,7 +30,7 @@ function Hero() {
       <div className="overlay">
         <h2>Welcome to Kidza Enterprise Ltd</h2>
         <p>Seamlessly connect and deliver across your city.</p>
-        <a href="/order" className="hero-btn">Order Now</a>
+        <a href="/catalog" className="hero-btn">Catalog</a>
       </div>
     </section>
   );

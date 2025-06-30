@@ -63,7 +63,7 @@ body {
   bottom: 50%;
   transform: translateY(50%);
   background-color: #111;
-  color: gold;
+  color: #f2b632;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   white-space: nowrap;
@@ -75,5 +75,45 @@ body {
 
 .whatsapp-tooltip-container:hover .whatsapp-tooltip {
   opacity: 1;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  h1, h2, h3 {
+    font-size: 1.3rem;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    font-size: 1rem;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px;
+    margin-top: 10px;
+  }
+
+  .modal {
+    padding: 1rem;
+    max-width: 95%;
+  }
+
+  .catalog-card img,
+  .modal img {
+    width: 100%;
+    height: auto;
+  }
+
+  .cart-item,
+  .order-page form {
+    padding: 10px;
+  }
 }
 

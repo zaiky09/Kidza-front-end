@@ -3,173 +3,124 @@ import { useNavigate } from 'react-router-dom';
 import './Order.css';
 import itemsData from '../../data/items.json';
 
-// Get price per kg for selected item
-const getItemPrice = (items, itemName) => {
-  const selectedItem = items.find((itm) => itm.name === itemName);
-  return selectedItem ? selectedItem.pricePerKg : 0;
+const getItemPrice = (itemName) => {
+  const item = itemsData.find((i) => i.name === itemName);
+  return item ? item.pricePerKg : 0;
 };
 
 function Order() {
+  const [cartItems, setCartItems] = useState([]);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [pickup, setPickup] = useState('');
   const [dropoff, setDropoff] = useState('');
-  const [item, setItem] = useState('');
-  const [quantity, setQuantity] = useState(1);
-  const [weight, setWeight] = useState('');
-  const [priceEstimate, setPriceEstimate] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const [items, setItems] = useState([]);
-
   const [emailError, setEmailError] = useState('');
   const [phoneError, setPhoneError] = useState('');
-
   const navigate = useNavigate();
 
   useEffect(() => {
-    setItems(itemsData);
+    const stored = JSON.parse(localStorage.getItem('currentCart') || '[]');
+    const withEstimates = stored.map((item) => {
+      const price = getItemPrice(item.item);
+      const qty = parseInt(item.quantity) || 1;
+      const wt = parseFloat(item.weight) || 1;
+      const estimate = price * qty * wt;
+      return { ...item, priceEstimate: estimate };
+    });
+    setCartItems(withEstimates);
   }, []);
 
-  useEffect(() => {
-    const pricePerKg = getItemPrice(items, item);
-    const totalWeight = parseFloat(weight) || 1;
-    const qty = parseInt(quantity) || 1;
-    const estimated = pricePerKg * totalWeight * qty;
-    setPriceEstimate(estimated);
-  }, [items, item, weight, quantity]);
+  const grandTotal = cartItems.reduce((sum, i) => sum + (i.priceEstimate || 0), 0);
 
-  const validatePhone = (value) => {
-    const phoneRegex = /^(?:\+?254|0)(7|1)\d{8}$/;
-    return phoneRegex.test(value);
-  };
-
-  const validateEmail = (value) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(value);
-  };
+  const validatePhone = (value) => /^(?:\+?254|0)(7|1)\d{8}$/.test(value);
+  const validateEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 
   const handleOrder = () => {
     let valid = true;
 
     if (!validatePhone(phone)) {
-      setPhoneError('Please enter a valid Kenyan phone number.');
+      setPhoneError("Invalid Kenyan phone.");
       valid = false;
-    } else {
-      setPhoneError('');
-    }
+    } else setPhoneError('');
 
     if (!validateEmail(email)) {
-      setEmailError('Please enter a valid email address.');
+      setEmailError("Invalid email.");
       valid = false;
-    } else {
-      setEmailError('');
-    }
+    } else setEmailError('');
 
-    if (valid) {
-      setShowModal(true);
-    }
+    if (valid) setShowModal(true);
   };
 
   const confirmOrder = () => {
-    const message = `Hello, my name is ${name}. I would like to order:\n${quantity} x ${item}\nFrom: ${pickup} to ${dropoff}`;
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/254712345678?text=${encodedMessage}`, '_blank');
-    setShowModal(false);
+    const summary = cartItems.map(
+      (item) => `- ${item.quantity} x ${item.item} (${item.weight}kg)`
+    ).join('\n');
 
-    const orders = JSON.parse(localStorage.getItem('orders') || '[]');
-    orders.push({
+    const msg = `Hello, my name is ${name}.\nI want to order:\n${summary}\nDropoff: ${dropoff}\nTotal: KES ${grandTotal.toLocaleString()}`;
+    const encoded = encodeURIComponent(msg);
+    window.open(`https://wa.me/254712345678?text=${encoded}`, '_blank');
+
+    const orderObj = {
       name,
       email,
       phone,
-      item,
-      quantity,
-      pickup,
       dropoff,
-      weight,
-      priceEstimate,
-      date: new Date().toISOString()
-    });
-    localStorage.setItem('orders', JSON.stringify(orders));
-
-    const currentOrder = {
-      name,
-      email,
-      phone,
-      item,
-      quantity,
-      pickup,
-      dropoff,
-      weight,
-      priceEstimate,
-      timestamp: new Date().toISOString()
+      items: cartItems,
+      totalPrice: grandTotal,
+      date: new Date().toISOString(),
     };
-    localStorage.setItem('currentOrder', JSON.stringify(currentOrder));
+
+    const prev = JSON.parse(localStorage.getItem('orders') || '[]');
+    prev.push(orderObj);
+    localStorage.setItem('orders', JSON.stringify(prev));
+    localStorage.removeItem('currentCart');
 
     navigate('/order-summary');
   };
 
   return (
     <div className="order-page">
-      <h2>Place Your Order</h2>
+      <h2>Confirm Your Order</h2>
       <form onSubmit={(e) => { e.preventDefault(); handleOrder(); }}>
-        <label>Your Name:</label>
-        <input type="text" value={name} required onChange={(e) => setName(e.target.value)} />
-
-        <label>Email Address:</label>
-        <input type="email" value={email} required onChange={(e) => setEmail(e.target.value)} />
+        <input placeholder="Your Name" value={name} onChange={(e) => setName(e.target.value)} required />
+        <input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         {emailError && <p className="error">{emailError}</p>}
-
-        <label>Phone Number:</label>
-        <input type="tel" value={phone} required onChange={(e) => setPhone(e.target.value)} />
+        <input placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} required />
         {phoneError && <p className="error">{phoneError}</p>}
+        <input placeholder="Dropoff Location" value={dropoff} onChange={(e) => setDropoff(e.target.value)} required />
 
-        <label>Pickup Location:</label>
-        <input type="text" value={pickup} required onChange={(e) => setPickup(e.target.value)} />
-
-        <label>Dropoff Location:</label>
-        <input type="text" value={dropoff} required onChange={(e) => setDropoff(e.target.value)} />
-
-        <label>Item:</label>
-        <select value={item} required onChange={(e) => setItem(e.target.value)}>
-          <option value="">Select an item</option>
-          {items.map((itm) => (
-            <option key={itm.id} value={itm.name}>{itm.name}</option>
+        <h3>🛒 Items</h3>
+        <ul className="cart-list">
+          {cartItems.map((item, i) => (
+            <li key={i}>
+              {item.quantity} x {item.item} ({item.weight}kg) — KES {item.priceEstimate.toLocaleString()}
+            </li>
           ))}
-        </select>
+        </ul>
 
-        <label>Quantity:</label>
-        <input type="number" min="1" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
-
-        <label>Weight (in kg):</label>
-        <input type="number" min="0.1" step="0.1" value={weight} onChange={(e) => setWeight(e.target.value)} />
-
-        <p className="price-estimate">💰 Estimated Price: KES {priceEstimate || 0}</p>
-
+        <p className="price-estimate">💰 Total: <strong>KES {grandTotal.toLocaleString()}</strong></p>
         <button type="submit">Send Order via WhatsApp</button>
       </form>
 
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
-            <h3>Confirm Your Order</h3>
+            <h3>Review & Confirm</h3>
             <p><strong>Name:</strong> {name}</p>
             <p><strong>Email:</strong> {email}</p>
             <p><strong>Phone:</strong> {phone}</p>
-            <p><strong>Item:</strong> {item}</p>
-            <p><strong>Quantity:</strong> {quantity}</p>
-            <p><strong>Pickup:</strong> {pickup}</p>
             <p><strong>Dropoff:</strong> {dropoff}</p>
-            <p><strong>Weight:</strong> {weight} kg</p>
-            <p className="price-estimate">
-              💰 Estimated Price: <strong>KES {priceEstimate ? priceEstimate.toLocaleString() : 0}</strong>
-            </p>
-            {item && weight && quantity && (
-              <p className="price-breakdown">
-                Breakdown: KES {getItemPrice(items, item)} x {weight}kg x {quantity} = <strong>KES {priceEstimate.toLocaleString()}</strong>
-              </p>
-            )}
 
+            <ul>
+              {cartItems.map((item, i) => (
+                <li key={i}>
+                  {item.quantity} x {item.item} ({item.weight}kg) = KES {item.priceEstimate.toLocaleString()}
+                </li>
+              ))}
+            </ul>
+
+            <p>💰 Total: KES {grandTotal.toLocaleString()}</p>
             <div className="modal-actions">
               <button onClick={confirmOrder}>Confirm & Send</button>
               <button onClick={() => setShowModal(false)}>Cancel</button>

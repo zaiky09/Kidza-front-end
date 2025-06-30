@@ -60,7 +60,7 @@ function Signup() {
       </div>
 
       <div className="auth-right">
-        <h1>FreshLink</h1>
+        <h1>Kidza Enterprise Ltd</h1>
         <p>Sign up to unlock smooth logistics and real-time order delivery, powered by your phone.</p>
       </div>
     </div>

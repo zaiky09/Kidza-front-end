@@ -1,7 +1,7 @@
 .auth-page {
   display: flex;
   height: 100vh;
-  background: linear-gradient(to right, #1e3c72, #2a5298);
+  background: linear-gradient(to right, #f2b632, black);
   color: #fff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -22,7 +22,7 @@
 }
 
 .auth-right {
-  background: linear-gradient(to bottom right, #2a5298, #1e3c72);
+  background: linear-gradient(to bottom right, #f2b632, black);
   align-items: center;
   text-align: center;
   justify-content: center;
@@ -50,7 +50,7 @@
 
 .auth-left button {
   padding: 0.75rem;
-  background-color: #1e3c72;
+  background-color: black;
   color: white;
   border: none;
   font-weight: bold;
@@ -60,14 +60,14 @@
 }
 
 .auth-left button:hover {
-  background-color: #2a5298;
+  background-color: #f2b632;
 }
 
 .auth-right h1 {
   font-size: 3rem;
   font-weight: 800;
   margin-bottom: 1rem;
-  color: #f2b632;
+  color: white;
 }
 
 .auth-right p {

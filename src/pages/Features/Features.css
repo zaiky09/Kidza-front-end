@@ -1,9 +1,9 @@
 .features-section {
   background-color: #000;
-  color: gold;
+  color: #f2b632;
   padding: 4rem 2rem;
   text-align: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .features-title {
@@ -14,8 +14,8 @@
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
 }
 
 .feature-card {
@@ -57,11 +57,11 @@
 .cta-section h3 {
   font-size: 1.75rem;
   margin-bottom: 1rem;
-  color: gold;
+  color: #f2b632;
 }
 
 .cta-button {
-  background: gold;
+  background: #f2b632;
   color: black;
   font-weight: bold;
   padding: 0.8rem 2rem;

@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home';
 import Features from './pages/Features/Features';
+import Catalog from './pages/Catalog/Catalog';
 import Contact from './pages/Contact/Contact';
+import Cart from './pages/Cart/Cart';
 import Order from './pages/Order/Order';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -22,7 +24,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/features" element={<Features />} />
+        <Route path="/catalog" element={<Catalog />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/quote" element={<Quote />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />

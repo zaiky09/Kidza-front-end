@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { Lock , Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import './Navbar.css';
 import logo from '../../assets/k(Brochure).png';
 
@@ -39,12 +39,14 @@ function Navbar() {
       <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/features">Features</Link></li>
+        <li><Link to="/catalog">Catalog</Link></li>
         <li><Link to="/contact">Contact</Link></li>
-        <li>
+        <li><Link to="/cart">Cart 🛒</Link></li>
+        {/* <li>
           <Link to="/order" className="order-link">
             Order {!isLoggedIn && <Lock size={14} />}
           </Link>
-        </li>
+        </li> */}
         {isLoggedIn ? (
           <li><button onClick={handleLogout} className="logout-btn">Logout</button></li>
         ) : (

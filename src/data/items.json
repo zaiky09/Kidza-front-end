@@ -1,9 +1,51 @@
 [
-  { "id": 1, "name": "Fresh Tomatoes (kg)", "pricePerKg": 50},
-  { "id": 2, "name": "Avocados (kg)", "pricePerKg": 100 },
-  { "id": 3, "name": "Mangoes (kg)", "pricePerKg": 120 },
-  { "id": 4, "name": "Kales (Sukuma) bundle" , "pricePerKg": 90 },
-  { "id": 5, "name": "Onions (kg)", "pricePerKg": 150 },
-  { "id": 6, "name": "Kales (Sukuma)" },
-  { "id": 7, "name": "Kales (Sukuma)" }
+  {
+    "id": 1,
+    "name": "Fresh Tomatoes",
+    "image": "Supply1.jpg",
+    "description": "Juicy red tomatoes delivered fresh from the farm.",
+    "pricePerKg": 70
+  },
+  {
+    "id": 2,
+    "name": "Green Bananas",
+    "image": "Supply2.jpg",
+    "description": "High-quality green bananas ideal for cooking.",
+    "pricePerKg": 45
+  },
+  {
+    "id": 3,
+    "name": "Sugar",
+    "image": "Supply2.jpg",
+    "description": "High-quality green bananas ideal for cooking.",
+    "pricePerKg": 170
+  },
+  {
+    "id": 4,
+    "name": "Yellow Beans",
+    "image": "Supply3.jpg",
+    "description": "High-quality green bananas ideal for cooking.",
+    "pricePerKg": 180
+  },
+  {
+    "id": 5,
+    "name": "Green Bananas",
+    "image": "Supply4.jpg",
+    "description": "High-quality green bananas ideal for cooking.",
+    "pricePerKg": 45
+  },
+  {
+    "id": 6,
+    "name": "Green Grams(Nylon)",
+    "image": "Supply5.jpg",
+    "description": "High-quality green bananas ideal for cooking.",
+    "pricePerKg": 150
+  },
+  {
+    "id": 7,
+    "name": "Green Bananas",
+    "image": "Supply6.jpg",
+    "description": "High-quality green bananas ideal for cooking.",
+    "pricePerKg": 45
+  }
 ]
