@@ -37,22 +37,22 @@ function Navbar() {
       </div>
 
       <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/features">Features</Link></li>
-        <li><Link to="/catalog">Catalog</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
-        <li><Link to="/cart">Cart 🛒</Link></li>
+        <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
+        <li><Link to="/features" onClick={() => setMenuOpen(false)}>Features</Link></li>
+        <li><Link to="/catalog" onClick={() => setMenuOpen(false)}>Catalog</Link></li>
+        <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
+        <li><Link to="/cart" onClick={() => setMenuOpen(false)}>Cart 🛒</Link></li>
         {/* <li>
           <Link to="/order" className="order-link">
             Order {!isLoggedIn && <Lock size={14} />}
           </Link>
         </li> */}
         {isLoggedIn ? (
-          <li><button onClick={handleLogout} className="logout-btn">Logout</button></li>
+          <li><button onClick={() => { handleLogout(); setMenuOpen(false); }} className="logout-btn">Logout</button></li>
         ) : (
           <>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/signup">Sign Up</Link></li>
+            <li><Link to="/login" onClick={() => setMenuOpen(false)}>Login</Link></li>
+      <li><Link to="/signup" onClick={() => setMenuOpen(false)}>Sign Up</Link></li>
           </>
         )}
       </ul>
