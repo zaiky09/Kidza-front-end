@@ -1,0 +1,9 @@
+[
+  { "id": 1, "name": "Fresh Tomatoes (kg)", "pricePerKg": 50},
+  { "id": 2, "name": "Avocados (kg)", "pricePerKg": 100 },
+  { "id": 3, "name": "Mangoes (kg)", "pricePerKg": 120 },
+  { "id": 4, "name": "Kales (Sukuma) bundle" , "pricePerKg": 90 },
+  { "id": 5, "name": "Onions (kg)", "pricePerKg": 150 },
+  { "id": 6, "name": "Kales (Sukuma)" },
+  { "id": 7, "name": "Kales (Sukuma)" }
+]

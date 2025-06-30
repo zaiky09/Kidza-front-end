@@ -1,0 +1,75 @@
+.features-section {
+  background-color: #000;
+  color: gold;
+  padding: 4rem 2rem;
+  text-align: center;
+  height: 100vh;
+}
+
+.features-title {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  background-color: #111;
+  padding: 2rem;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.05);
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 30px rgba(255, 215, 0, 0.15);
+}
+
+.feature-icon {
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/* CTA Section */
+.cta-section {
+  margin-top: 4rem;
+  background: #111;
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.05);
+}
+
+.cta-section h3 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: gold;
+}
+
+.cta-button {
+  background: gold;
+  color: black;
+  font-weight: bold;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+  background: white;
+}
